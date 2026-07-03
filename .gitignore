@@ -1,5 +1,11 @@
-# ComfyUI 主程序（git 自管理，整体忽略）
-ComfyUI/
+# ComfyUI 嵌套 git 仓库 & 缓存（保留源码）
+ComfyUI/.git/
+ComfyUI/custom_nodes/*/.git/
+ComfyUI/user/*.log
+ComfyUI/user/*.db
+ComfyUI/user/*.db.*
+ComfyUI/temp/
+ComfyUI/input/
 
 # 模型与生成产物（大文件）
 models_shared/**/*.safetensors
@@ -10,6 +16,7 @@ models_shared/**/*.pt
 models_shared/**/*.gguf
 outputs/
 inputs/
+output/
 
 # Python / conda 杂项
 __pycache__/
