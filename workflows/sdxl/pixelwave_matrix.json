@@ -1,0 +1,40 @@
+{
+  "_comment": "PixelWave 测试矩阵：4 个不同主题。用 scripts/run_pixelwave_matrix.sh 批量提交到 ComfyUI API。",
+  "matrix": [
+    {
+      "name": "01_character",
+      "purpose": "角色精灵图",
+      "positive": "pixel art character sprite, brave knight with sword and shield, side view, idle pose, 16-bit RPG style, transparent background, clean pixel edges, limited color palette",
+      "seed": 11111
+    },
+    {
+      "name": "02_tileset",
+      "purpose": "地块/瓷砖",
+      "positive": "pixel art tileset, top-down view, grass dirt water stone tiles, seamless 16x16 grid, vibrant nintendo style, JRPG overworld",
+      "seed": 22222
+    },
+    {
+      "name": "03_interior",
+      "purpose": "室内场景",
+      "positive": "pixel art cozy interior, JRPG bedroom scene, warm lamp light, wooden floor, isometric view, detailed pixel art, 32-bit retro style",
+      "seed": 33333
+    },
+    {
+      "name": "04_enemy",
+      "purpose": "敌人精灵+多帧",
+      "positive": "pixel art slime enemy, 4 frames walk cycle, side view, green slime, 32x32 sprite, nintendo style, retro game asset",
+      "seed": 44444
+    }
+  ],
+  "shared": {
+    "negative": "blurry, photorealistic, 3d render, smooth gradient, antialiasing, low quality, watermark, signature, deformed, jpeg artifacts",
+    "checkpoint": "pixelwave_sdxl11.safetensors",
+    "vae": "sdxl_vae_fp16_fix.safetensors",
+    "sampler": "dpmpp_sde",
+    "scheduler": "karras",
+    "steps": 20,
+    "cfg": 5.5,
+    "width": 1024,
+    "height": 1024
+  }
+}

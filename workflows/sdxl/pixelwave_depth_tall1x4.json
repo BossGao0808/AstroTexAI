@@ -1,0 +1,132 @@
+{
+  "_comment": "PixelWave SDXL11 + ControlNet Depth；竖向高柱（H:W=4:1）。深度图 inputs/depth_hex_prism_tall1x4.png 由 scripts/... 生成。修改 KSampler.seed 即可换一张。",
+  "prompt": {
+    "3": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": {
+        "ckpt_name": "pixelwave_sdxl11.safetensors"
+      }
+    },
+    "4": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "tall vertical hexagonal pillar made of dirt and earth, tower-like roguelike game tile asset, soil texture with small pebbles and tufts of grass on the top cap, vibrant 2D game art, clean silhouette, JRPG / hex grid game style, soft natural lighting, sharp focus",
+        "clip": [
+          "3",
+          1
+        ]
+      }
+    },
+    "5": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "blurry, photorealistic, 3d render, low quality, watermark, signature, deformed, multiple objects, scattered, cluttered, jpeg artifacts",
+        "clip": [
+          "3",
+          1
+        ]
+      }
+    },
+    "11": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "depth_hex_prism_tall1x4.png",
+        "upload": "image"
+      }
+    },
+    "12": {
+      "class_type": "ControlNetLoader",
+      "inputs": {
+        "control_net_name": "controlnet-depth-sdxl-1.0.safetensors"
+      }
+    },
+    "13": {
+      "class_type": "ControlNetApplyAdvanced",
+      "inputs": {
+        "positive": [
+          "4",
+          0
+        ],
+        "negative": [
+          "5",
+          0
+        ],
+        "control_net": [
+          "12",
+          0
+        ],
+        "image": [
+          "11",
+          0
+        ],
+        "strength": 0.85,
+        "start_percent": 0.0,
+        "end_percent": 1.0
+      }
+    },
+    "6": {
+      "class_type": "EmptyLatentImage",
+      "inputs": {
+        "width": 1024,
+        "height": 1024,
+        "batch_size": 1
+      }
+    },
+    "7": {
+      "class_type": "KSampler",
+      "inputs": {
+        "model": [
+          "3",
+          0
+        ],
+        "positive": [
+          "13",
+          0
+        ],
+        "negative": [
+          "13",
+          1
+        ],
+        "latent_image": [
+          "6",
+          0
+        ],
+        "seed": 20260527,
+        "steps": 28,
+        "cfg": 5.5,
+        "sampler_name": "dpmpp_sde",
+        "scheduler": "karras",
+        "denoise": 1.0
+      }
+    },
+    "10": {
+      "class_type": "VAELoader",
+      "inputs": {
+        "vae_name": "sdxl_vae_fp16_fix.safetensors"
+      }
+    },
+    "8": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": [
+          "7",
+          0
+        ],
+        "vae": [
+          "10",
+          0
+        ]
+      }
+    },
+    "9": {
+      "class_type": "SaveImage",
+      "inputs": {
+        "filename_prefix": "pixelwave_depth",
+        "images": [
+          "8",
+          0
+        ]
+      }
+    }
+  }
+}

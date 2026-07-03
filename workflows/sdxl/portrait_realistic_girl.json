@@ -1,0 +1,54 @@
+{
+  "_comment": "写实人像：黑发闭眼女孩 写真风格 白色半透连衣裙",
+  "prompt": {
+    "3": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": { "ckpt_name": "pixelwave_sdxl11.safetensors" }
+    },
+    "4": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "masterpiece, best quality, ultra high quality, photorealistic, raw photo, portrait photography, 1girl, solo, beautiful young japanese woman, long black silky hair flowing in soft breeze, closed eyes, serene peaceful expression, elegant translucent white sheer chiffon dress, semi-transparent fabric, soft natural window lighting, rim light on hair, shallow depth of field, bokeh background, soft focus, kodak portra 400, fujifilm pro 400h, professional fashion portrait, intimate atmosphere, delicate skin texture, detailed eyelashes, natural makeup, elegant pose, upper body shot",
+        "clip": ["3", 1]
+      }
+    },
+    "5": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "ugly, deformed, blurry, low quality, jpeg artifacts, watermark, signature, text, extra fingers, fused fingers, too many fingers, bad anatomy, bad hands, missing fingers, extra limbs, disfigured, distorted face, bad proportions, gross proportions, long neck, mutation, mutilated, poorly drawn face, poorly drawn hands, cartoon, anime, 3d render, plastic skin, oversaturated, overexposed, nsfw, nude, topless, cleavage, lingerie, underwear, bad clothes, messy hair, open eyes, looking at camera, harsh light",
+        "clip": ["3", 1]
+      }
+    },
+    "6": {
+      "class_type": "EmptyLatentImage",
+      "inputs": { "width": 896, "height": 1152, "batch_size": 1 }
+    },
+    "7": {
+      "class_type": "KSampler",
+      "inputs": {
+        "model": ["3", 0],
+        "positive": ["4", 0],
+        "negative": ["5", 0],
+        "latent_image": ["6", 0],
+        "seed": 20260702,
+        "steps": 28,
+        "cfg": 5.5,
+        "sampler_name": "dpmpp_sde",
+        "scheduler": "karras",
+        "denoise": 1.0
+      }
+    },
+    "10": {
+      "class_type": "VAELoader",
+      "inputs": { "vae_name": "sdxl_vae_fp16_fix.safetensors" }
+    },
+    "8": {
+      "class_type": "VAEDecode",
+      "inputs": { "samples": ["7", 0], "vae": ["10", 0] }
+    },
+    "9": {
+      "class_type": "SaveImage",
+      "inputs": { "filename_prefix": "portrait_blackhair_girl", "images": ["8", 0] }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# ComfyUI 主程序（git 自管理，整体忽略）
+ComfyUI/
+
+# 模型与生成产物（大文件）
+models_shared/**/*.safetensors
+models_shared/**/*.ckpt
+models_shared/**/*.bin
+models_shared/**/*.pth
+models_shared/**/*.pt
+models_shared/**/*.gguf
+outputs/
+inputs/
+
+# Python / conda 杂项
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 编辑器
+.idea/
+.vscode/
