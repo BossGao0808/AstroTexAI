@@ -1,6 +1,6 @@
 {
-  "last_node_id": 58,
-  "last_link_id": 10,
+  "last_node_id": 59,
+  "last_link_id": 12,
   "nodes": [
     {
       "id": 52,
@@ -55,26 +55,27 @@
       ]
     },
     {
-      "id": 55,
-      "type": "ConditioningZeroOut",
-      "pos": [450, 300],
-      "size": {"0": 320, "1": 60},
+      "id": 59,
+      "type": "CLIPTextEncode",
+      "pos": [450, 280],
+      "size": {"0": 420, "1": 100},
       "flags": {},
       "order": 3,
       "mode": 0,
       "inputs": [
-        {"name": "conditioning", "type": "CONDITIONING", "link": 3}
+        {"name": "clip", "type": "CLIP", "link": 3}
       ],
       "outputs": [
         {"name": "CONDITIONING", "type": "CONDITIONING", "links": [6], "slot_index": 0}
       ],
-      "title": "Negative = Zero (CFG=1)",
-      "properties": {"Node name for S&R": "ConditioningZeroOut"}
+      "title": "Negative Prompt (CFG=1, ignored)",
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": [""]
     },
     {
       "id": 57,
       "type": "EmptyLatentImage",
-      "pos": [450, 420],
+      "pos": [450, 430],
       "size": {"0": 320, "1": 110},
       "flags": {},
       "order": 4,
@@ -161,9 +162,9 @@
   "links": [
     [1, 52, 0, 54, 0, "MODEL"],
     [2, 53, 0, 51, 0, "CLIP"],
-    [3, 53, 0, 55, 0, "CLIP"],
+    [3, 53, 0, 59, 0, "CLIP"],
     [5, 51, 0, 54, 1, "CONDITIONING"],
-    [6, 55, 0, 54, 2, "CONDITIONING"],
+    [6, 59, 0, 54, 2, "CONDITIONING"],
     [7, 57, 0, 54, 3, "LATENT"],
     [8, 54, 0, 56, 0, "LATENT"],
     [9, 58, 0, 56, 1, "VAE"],
