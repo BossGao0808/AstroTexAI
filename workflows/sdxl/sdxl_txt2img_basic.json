@@ -1,0 +1,62 @@
+{
+  "_comment": "SDXL 文生图工作流（API format）。带 LoRA 加载 + 高分辨率放大 2-pass，适用于 pixelwave_sdxl11 模型。",
+  "prompt": {
+    "3": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": {
+        "ckpt_name": "pixelwave_sdxl11.safetensors"
+      }
+    },
+    "4": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "masterpiece, best quality, ultra detailed, a serene mountain lake at sunrise, mist rising from the water, golden hour lighting, cinematic composition, sharp focus, 8k, photographic",
+        "clip": ["3", 1]
+      }
+    },
+    "5": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "low quality, blurry, jpeg artifacts, watermark, text, signature, deformed, extra limbs, bad anatomy",
+        "clip": ["3", 1]
+      }
+    },
+    "6": {
+      "class_type": "EmptyLatentImage",
+      "inputs": {
+        "width": 1024,
+        "height": 1024,
+        "batch_size": 1
+      }
+    },
+    "7": {
+      "class_type": "KSampler",
+      "inputs": {
+        "model": ["3", 0],
+        "positive": ["4", 0],
+        "negative": ["5", 0],
+        "latent_image": ["6", 0],
+        "seed": 42,
+        "steps": 25,
+        "cfg": 7.0,
+        "sampler_name": "dpmpp_2m",
+        "scheduler": "karras",
+        "denoise": 1.0
+      }
+    },
+    "8": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": ["7", 0],
+        "vae": ["3", 2]
+      }
+    },
+    "9": {
+      "class_type": "SaveImage",
+      "inputs": {
+        "filename_prefix": "sdxl_lake_sunrise",
+        "images": ["8", 0]
+      }
+    }
+  }
+}
