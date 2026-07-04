@@ -108,9 +108,9 @@
       "outputs": [
         {"name": "LATENT", "type": "LATENT", "links": [8], "slot_index": 0}
       ],
-      "title": "Krea2 Sampler",
+      "title": "Krea2 Sampler (8 steps, CFG=1)",
       "properties": {"Node name for S&R": "KSampler"},
-      "widgets_values": [42, "randomize", 20, 4.0, "euler", "simple", 1.0]
+      "widgets_values": [42, "randomize", 8, 1.0, "euler", "simple", 1.0]
     },
     {
       "id": 7,
@@ -124,9 +124,9 @@
       "outputs": [
         {"name": "VAE", "type": "VAE", "links": [9], "slot_index": 0}
       ],
-      "title": "Krea2 VAE (Pixel Space)",
+      "title": "Krea2 VAE (qwen_image_vae)",
       "properties": {"Node name for S&R": "VAELoader"},
-      "widgets_values": ["pixel_space"]
+      "widgets_values": ["qwen_image_vae.safetensors"]
     },
     {
       "id": 8,
