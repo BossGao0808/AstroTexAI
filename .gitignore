@@ -1,6 +1,9 @@
 # ComfyUI 嵌套 git 仓库 & 缓存（保留源码）
 ComfyUI/.git/
 ComfyUI/custom_nodes/*/.git/
+
+# 保留工作流文件，但忽略日志/缓存
+!ComfyUI/user/default/workflows/
 ComfyUI/user/*.log
 ComfyUI/user/*.db
 ComfyUI/user/*.db.*
